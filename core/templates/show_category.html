@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+<!--loop added-->
+{% if categories_set.all %}
+    <ul>
+    {% for subject in subjects_set.all %}
+        <div>
+          <img src="{{ subject.photo }}" href= "{% url 'core:show_category' category_slug %}" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+          <h3 href= "{% url 'core:show_subject' subject.pk %}"> {{ subject.name }}</h3>
+          <p href= "{% url 'core:show_subject' subject.pk %}">{{ subject.code }}</p>
+        </div>
+    {% endfor %}
+    </ul>
+{% else %}
+<p> No Subjects are available yet. </p>
+{% endif %}
+{% endblock %}

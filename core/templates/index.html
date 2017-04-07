@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}الرئيسية{% endblock %}
+
+{% block style %}
+/* Create a Parallax Effect */
+.bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* First image (Logo. Full height) */
+.bgimg-1 {
+    background-image: url('http://stmedia.startribune.com/images/ows_143760495572625.jpg');
+    min-height: 100%;
+}
+
+/* Second image (Portfolio) */
+.bgimg-2 {
+    background-image: url("https://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2011/12/education.jpg");
+    min-height: 400px;
+}
+    
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+    }
+}
+{% endblock %}
+
+{% block content %}
+<!-- First Parallax Image with Logo Text -->
+<div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+  <div class="w3-display-middle" style="white-space:nowrap;">
+    <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">أكاديميّة <span class="w3-hide-small">طب</span> الأسنان</span>
+  </div>
+</div>
+
+<!-- Container (Years Section) -->
+<div class="w3-content w3-container w3-padding-64" id="years">
+  <h3 class="w3-center">السنوات الدراسيّة</h3>
+  <p class="w3-center"><em>!هُنا مابعد كلية العلوم والهن الصحيّة</em></p>
+  <p>نبذة</p>
+</div> 
+
+<!--loop added-->
+<ul>
+{% for category in categories_set.all %}
+    <div class="w3-quarter">
+    <img src="{{ category.photo }}" href="{% url 'core:show_category' category_slug %}"alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+    <h3 href="{% url 'core:show_category' category_slug %}"> {{ category.name }}</h3>
+    <p href="{% url 'core:show_category' category_slug %}">{{ category.code }}</p>
+    </div>
+{% endfor %}
+</ul>
+
+
+<!-- Second Parallax Image with Portfolio Text -->
+<div class="bgimg-2 w3-display-container w3-opacity-min">
+  <div class="w3-display-middle">
+    <span class="w3-xxlarge w3-text-white w3-wide">عنّا</span>
+  </div>
+</div>
+
+
+<!-- Container (Contact Section) -->
+<div class="w3-content w3-container w3-padding-64" id="contact">
+  <p class="w3-center"><em>!رأيك يهمنا</em></p>
+
+  <div class="w3-row w3-padding-64 w3-section">
+    <div class="w3-container">
+    </div>
+    <div class="w3-panel">
+      <div class="w3-leftw3-large w3-margin-bottom">
+        <i class="w3-left fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> كلية طب الأسنان - جامعة الملك سعود بن عبدالعزيز للعلوم الصحيّة<br>
+        <i class="w3-left fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> البريد الإلكتروني: <br>
+      </div>
+      <p>!اترك لنا تعليق</p>
+      <form action="/action_page.php" target="_blank">
+        <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="الاسم" required name="Name">
+          </div>
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="البريد الإلكتروني" required name="Email">
+          </div>
+        </div>
+        <input class="w3-input w3-border" type="text" placeholder="رسالتك" required name="Message">
+        <button class="w3-button w3-black w3-right w3-section" type="submit">
+          <i class="fa fa-paper-plane"></i> !أرسل
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
